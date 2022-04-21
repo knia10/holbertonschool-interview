@@ -9,6 +9,7 @@ The first box boxes[0] is unlocked
 Return True if all boxes can be opened, else return False
 '''
 
+
 def canUnlockAll(boxes):
     '''
     Method that determines if all the boxes can be opened.
