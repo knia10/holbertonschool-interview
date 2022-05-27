@@ -1,20 +1,23 @@
 #include "lists.h"
 
 /**
-check_position: check value of give position
+list_reverse: Reverses a linked list nodes
 @head: pointer to the head of list
-@position: position of node
 Return: Value of given node
 **/
 
-int check_position(listint_t **head, int position) {
-	listint_t *current = *head;
-	int count = 1;
-	while (count <= position) {
-		current = current->next;
-		count ++;
+listint_t *list_reverse(listint_t *head) {
+	listint_t *current = head;
+	listint_t *j = head;
+	listint_t *prev = NULL;
+
+	while (j) {
+		j = current->next;
+		current->next = prev;
+		prev = current;
+		current = j;
 	}
-	return (current->n);
+	return (prev);
 }
 
 /**
@@ -27,31 +30,38 @@ int is_palindrome(listint_t **head) {
 	listint_t *current = *head;
 	listint_t *init = *head;
 	listint_t *temp = *head;
-	int node = 1;
-	int valor = 0;
-	int count = 1;
+	listint_t *i;
 
 	if (*head == NULL) {
 		return (1);
 	}
 
-	while (current->next != NULL) {
-		node += 1;
-		current = current->next;
+	while (current && temp->next && temp->next->next) {
+		init = init->next;
+		temp = temp->next->next;
 	}
-
-	if (init->n != current->n) {
-		return (0);
-	}
-
-	while (count <= node) {
-		valor = check_position(&temp, node - count);
-		if (init->n != valor) {
+	i = list_reverse(init);
+	while(i && current) {
+		if (i->n != current->n) {
 			return (0);
 		}
-
-		init = init-> next;
-		count ++;
+		i = i->next;
+		current = current->next;
 	}
-	return (1);
+	return(1);
+
+	// if (init->n != current->n) {
+	// 	return (0);
+	// }
+
+	// while (count <= node) {
+	// 	valor = list_reverse(&temp, node - count);
+	// 	if (init->n != valor) {
+	// 		return (0);
+	// 	}
+
+	// 	init = init-> next;
+	// 	count ++;
+	// }
+	// return (1);
 }
