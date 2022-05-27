@@ -49,19 +49,4 @@ int is_palindrome(listint_t **head) {
 		current = current->next;
 	}
 	return(1);
-
-	// if (init->n != current->n) {
-	// 	return (0);
-	// }
-
-	// while (count <= node) {
-	// 	valor = list_reverse(&temp, node - count);
-	// 	if (init->n != valor) {
-	// 		return (0);
-	// 	}
-
-	// 	init = init-> next;
-	// 	count ++;
-	// }
-	// return (1);
 }
