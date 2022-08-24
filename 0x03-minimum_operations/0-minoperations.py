@@ -14,12 +14,11 @@ def minOperations(n):
     if n == 1:
         return n
     minop = []
-    mod = 2
+    mod = 1
     while n != 1:
+        mod += 1
         if n % mod == 0:
             while n % mod == 0:
                 n = n // mod
                 minop.append(mod)
-        mod += 1
-
     return sum(minop)
