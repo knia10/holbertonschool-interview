@@ -11,8 +11,6 @@ number of operations needed to result in exactly n H characters in the file.
 def minOperations(n):
     if n == 0 or type(n) is not int:
         return 0
-    if n == 1:
-        return n
     hchar = 0
     mod = 2
     while n > 1:
