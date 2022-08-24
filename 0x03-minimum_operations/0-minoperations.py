@@ -13,12 +13,11 @@ def minOperations(n):
         return 0
     if n == 1:
         return n
-    minop = []
-    mod = 1
-    while n != 1:
+    hchar = 0
+    mod = 2
+    while n > 1:
+        while n % mod == 0:
+            hchar += mod
+            n = n // mod
         mod += 1
-        if n % mod == 0:
-            while n % mod == 0:
-                n = n // mod
-                minop.append(mod)
-    return sum(minop)
+    return hchar
