@@ -20,44 +20,44 @@ Warning: In this sample, you will have random value
 - it’s normal to not have the same output as this one.
 '''
 
-import sys
+from sys import stdin
+
+st_code = {
+    "200": 0,
+    "301": 0,
+    "400": 0,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "405": 0,
+    "500": 0
+}
+
+file_size = 0
+
+
+def status():
+    '''Function that prints the status'''
+    print("File size: {}".format(file_size))
+    for key in sorted(st_code.keys()):
+        if st_code[key]:
+            print("{}: {}".format(key, st_code[key]))
 
 
 if __name__ == "__main__":
-    st_code = {"200": 0,
-               "301": 0,
-               "400": 0,
-               "401": 0,
-               "403": 0,
-               "404": 0,
-               "405": 0,
-               "500": 0}
-    count = 1
-    file_size = 0
-
-    def read_data(line):
-        '''Function that parse, read and save data'''
-        try:
-            split_line = line.split()
-            status_code = split_line[-2]
-            if status_code in st_code.keys():
-                st_code[status_code] += 1
-            return int(split_line[-1])
-        except Exception:
-            return 0
-
-    def status():
-        '''Function that prints the status'''
-        print("File size: {}".format(file_size))
-        for key in sorted(st_code.keys()):
-            if st_code[key]:
-                print("{}: {}".format(key, st_code[key]))
-
+    count = 0
     try:
-        for line in sys.stdin:
-            file_size += read_data(line)
-            if count % 10 == 0:
+        for line in stdin:
+            try:
+                split_line = line.split()
+                file_size += int(split_line[-1])
+                if split_line[-2] in st_code:
+                    st_code[split_line[-2]] += 1
+            except:
+                pass
+            if count == 9:
                 status()
+                count = -1
             count += 1
     except KeyboardInterrupt:
         status()
